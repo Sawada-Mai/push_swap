@@ -6,7 +6,7 @@
 /*   By: msawada <msawada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 17:06:27 by msawada           #+#    #+#             */
-/*   Updated: 2024/10/06 21:02:11 by msawada          ###   ########.fr       */
+/*   Updated: 2024/10/06 21:26:03 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,3 +93,4 @@ void	main_sort(t_stack **list_a, t_stack **list_b, int a_total)
 	}
 	return ;
 }
+
