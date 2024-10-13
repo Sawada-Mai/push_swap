@@ -6,7 +6,7 @@
 /*   By: msawada <msawada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 20:05:42 by msawada           #+#    #+#             */
-/*   Updated: 2024/10/13 16:53:33 by msawada          ###   ########.fr       */
+/*   Updated: 2024/10/13 21:47:00 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	count_sort_a(t_stack *list, int num, int total)
 	int	insert_position;
 
 	insert_position = 0;
-	while (!(list == num))
+	while (!(list->num == num))
 	{
 		insert_position++;
 		list = list->next;
@@ -62,6 +62,7 @@ int	count_sort_b(t_stack *list_b, int num, int total)
 	int	insert_position;
 
 	insert_position = find_insert_position(list_b, num, total);
+	printf("insert_position = %d\n", insert_position);
 	if (insert_position <= total / 2)
 	{
 		return (insert_position);

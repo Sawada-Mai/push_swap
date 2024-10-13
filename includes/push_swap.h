@@ -24,12 +24,15 @@ typedef struct s_list {
 	int							b_total;
 }	t_list;
 
-void	main_sort(t_stack *list_a, t_stack *list_b, int total);
+void	main_sort(t_stack **list_a, t_stack **list_b, int total);
 void	ft_p(t_stack **list_a, t_stack **list_b);
 void	ft_s(t_stack **list);
 void	ft_r(t_stack **list);
 void	ft_rr(t_stack **list);
-void	print_list(t_stack *list);
+void	add_node(t_stack **list, int num);
+void	move_num(t_stack **list_a, t_stack **list_b, t_list *cheapest);
+void	print_list(t_stack *list_a, t_stack *list_b);
+int		atoi_arg(char *str);
 int		count_sort_a(t_stack *list, int num, int total);
 int		count_sort_b(t_stack *list_b, int num, int total);
 t_stack	*search_end(t_stack *list);

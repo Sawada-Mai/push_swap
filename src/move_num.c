@@ -6,7 +6,7 @@
 /*   By: msawada <msawada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 21:01:49 by msawada           #+#    #+#             */
-/*   Updated: 2024/10/13 16:46:20 by msawada          ###   ########.fr       */
+/*   Updated: 2024/10/13 21:11:59 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ void	move_rrr(t_stack **list_a, t_stack **list_b, t_list *cheapest)
 		{
 			cheapest->sort_a_count++;
 			cheapest->sort_b_count++;
-			ft_rr(&list_a);
-			ft_rr(&list_b);
+			ft_rr(list_a);
+			ft_rr(list_b);
 			write(1, "rrr\n", 4);
 		}
 		else if (cheapest->sort_a_count < 0)
 		{
 			cheapest->sort_a_count++;
-			ft_rr(&list_a);
+			ft_rr(list_a);
 			write(1, "rra\n", 4);
 		}
 		else
 		{
 			cheapest->sort_b_count++;
-			ft_rr(&list_b);
+			ft_rr(list_b);
 			write(1, "rrb\n", 4);
 		}
 	}
@@ -55,21 +55,21 @@ void	move_rr(t_stack **list_a, t_stack **list_b, t_list *cheapest)
 		{
 			cheapest->sort_a_count--;
 			cheapest->sort_b_count--;
-			ft_r(&list_a);
-			ft_r(&list_b);
+			ft_r(list_a);
+			ft_r(list_b);
 			write(1, "rr\n", 3);
 		}
 		else if (cheapest->sort_a_count > 0)
 		{
 			cheapest->sort_a_count--;
-			ft_r(&list_a);
+			ft_r(list_a);
 			write(1, "ra\n", 3);
 		}
 		else
 		{
 			cheapest->sort_b_count--;
-			ft_r(&list_b);
-			write(1, "rb\n", 3);
+			ft_r(list_b);
+			write(1, "rb\n", 4);
 		}
 	}
 }
@@ -84,16 +84,17 @@ void	move_ra(t_stack **list_a, t_list *cheapest)
 		if (cheapest->sort_a_count < 0)
 		{
 			cheapest->sort_a_count++;
-			ft_rr(&list_a);
+			ft_rr(list_a);
 			write(1, "rra\n", 4);
 		}
 		else
 		{
 			cheapest->sort_a_count--;
-			ft_r(&list_a);
+			ft_r(list_a);
 			write(1, "ra\n", 3);
 		}
 	}
+	return ;
 }
 
 // Rotate list_b by the number of times sort_b_count.
@@ -106,16 +107,17 @@ void	move_rb(t_stack **list_b, t_list *cheapest)
 		if (cheapest->sort_b_count < 0)
 		{
 			cheapest->sort_b_count++;
-			ft_rr(&list_b);
+			ft_rr(list_b);
 			write(1, "rrb\n", 4);
 		}
 		else
 		{
 			cheapest->sort_b_count--;
-			ft_r(&list_b);
+			ft_r(list_b);
 			write(1, "rb\n", 3);
 		}
 	}
+	return ;
 }
 
 // Branching on negative and positive combinations
@@ -127,15 +129,15 @@ void	move_num(t_stack **list_a, t_stack **list_b, t_list *cheapest)
 {
 	if (cheapest->sort_a_count < 0 && cheapest->sort_b_count < 0)
 	{
-		move_rrr(&list_a, &list_b, cheapest);
+		move_rrr(list_a, list_b, cheapest);
 	}
-	else if (cheapest->sort_a_count >= 0 && cheapest->sort_b_count >= 0)
+	else if (cheapest->sort_a_count > 0 && cheapest->sort_b_count > 0)
 	{
-		move_rr(&list_a, &list_b, cheapest);
+		move_rr(list_a, list_b, cheapest);
 	}
 	else
 	{
-		move_ra(&list_a, cheapest);
-		move_rb(&list_b, cheapest);
+		move_ra(list_a, cheapest);
+		move_rb(list_b, cheapest);
 	}
 }
