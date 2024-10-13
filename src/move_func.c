@@ -6,7 +6,7 @@
 /*   By: msawada <msawada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:09:53 by msawada           #+#    #+#             */
-/*   Updated: 2024/10/06 20:03:56 by msawada          ###   ########.fr       */
+/*   Updated: 2024/10/13 15:44:59 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	ft_r(t_stack **list)
 	t_stack	*copy;
 	t_stack	*end;
 
-
 	if (!*list || !(*list)->next)
 		return ;
 	copy = *list;
@@ -58,7 +57,6 @@ void	ft_rr(t_stack **list)
 {
 	t_stack	*end;
 	t_stack	*second_end;
-
 
 	if (!*list || !(*list)->next)
 		return ;

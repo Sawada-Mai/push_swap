@@ -6,16 +6,19 @@
 /*   By: msawada <msawada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 17:06:27 by msawada           #+#    #+#             */
-/*   Updated: 2024/10/06 21:26:03 by msawada          ###   ########.fr       */
+/*   Updated: 2024/10/13 16:52:57 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
+// Stores the value of the node passed as argument to
+// the structure and the number of moves required.
+// The exact total number of moves for A and B is returned as the return value.
 int	cost(t_stack *list_a, t_stack *list_b, t_stack *node, t_list *cheapest)
 {
 	cheapest->num = node->num;
-	cheapest->sort_a_count = count_sort_a(list_a, node, cheapest->a_total);
+	cheapest->sort_a_count = count_sort_a(list_a, node->num, cheapest->a_total);
 	cheapest->sort_b_count = count_sort_b(list_b, node->num, cheapest->b_total);
 	if (cheapest->sort_a_count < 0 && cheapest->sort_b_count < 0)
 	{
@@ -40,6 +43,11 @@ int	cost(t_stack *list_a, t_stack *list_b, t_stack *node, t_list *cheapest)
 	}
 }
 
+// First, the first number of moves is set as minimum vlue,
+// and each time time a minimum value is reached,
+// the number of minimum moves is updated.
+// If the number of moves is the same,
+// the one with the smaller number is given priority.
 void	find_cheap_num(t_stack *list_a, t_stack *list_b, t_list *cheapest)
 {
 	int		cheap_count;
@@ -69,6 +77,9 @@ void	find_cheap_num(t_stack *list_a, t_stack *list_b, t_list *cheapest)
 	return ;
 }
 
+// Move the smallest number of ,
+// ovest to list_b until there are no more number on list_a.
+// After all the numbers are moved, return the numbers to list_a.
 void	main_sort(t_stack **list_a, t_stack **list_b, int a_total)
 {
 	t_list	*cheapest;
@@ -93,4 +104,3 @@ void	main_sort(t_stack **list_a, t_stack **list_b, int a_total)
 	}
 	return ;
 }
-
