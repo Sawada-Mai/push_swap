@@ -6,7 +6,7 @@
 /*   By: msawada <msawada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 19:33:36 by msawada           #+#    #+#             */
-/*   Updated: 2024/10/20 20:20:34 by msawada          ###   ########.fr       */
+/*   Updated: 2024/10/20 20:45:18 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 typedef struct s_stack
 {
-	int			num;
-	t_stack		*next;
+	int					num;
+	struct s_stack		*next;
 }				t_stack;
 
 typedef struct s_list
@@ -58,6 +58,7 @@ int		count_sort_b(t_stack *list_b, int num, int total);
 int		find_small_num(t_stack *list);
 int		find_big_num(t_stack *list);
 int		list_sorted(t_stack *list);
+int		atoi_arg(char *str, t_stack **list);
 t_stack	*search_end(t_stack *list);
 
 #endif
