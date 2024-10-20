@@ -6,7 +6,7 @@
 /*   By: msawada <msawada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 21:01:49 by msawada           #+#    #+#             */
-/*   Updated: 2024/10/13 21:11:59 by msawada          ###   ########.fr       */
+/*   Updated: 2024/10/19 22:48:33 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	move_rrr(t_stack **list_a, t_stack **list_b, t_list *cheapest)
 // otherwise, rotate by itself.
 void	move_rr(t_stack **list_a, t_stack **list_b, t_list *cheapest)
 {
-	while (cheapest->sort_a_count >= 0 || cheapest->sort_b_count >= 0)
+	while (cheapest->sort_a_count > 0 || cheapest->sort_b_count > 0)
 	{
 		if (cheapest->sort_a_count > 0 && cheapest->sort_b_count > 0)
 		{
@@ -77,19 +77,19 @@ void	move_rr(t_stack **list_a, t_stack **list_b, t_list *cheapest)
 // Rotate list_a by the number of times sort_a_count.
 // If negative, shift the value down.
 // If positive, shift the value up.
-void	move_ra(t_stack **list_a, t_list *cheapest)
+void	move_ra(t_stack **list_a, int sort_a_count)
 {
-	while (cheapest->sort_a_count != 0)
+	while (sort_a_count != 0)
 	{
-		if (cheapest->sort_a_count < 0)
+		if (sort_a_count < 0)
 		{
-			cheapest->sort_a_count++;
+			sort_a_count++;
 			ft_rr(list_a);
 			write(1, "rra\n", 4);
 		}
 		else
 		{
-			cheapest->sort_a_count--;
+			sort_a_count--;
 			ft_r(list_a);
 			write(1, "ra\n", 3);
 		}
@@ -100,19 +100,19 @@ void	move_ra(t_stack **list_a, t_list *cheapest)
 // Rotate list_b by the number of times sort_b_count.
 // If negative, shift the value down.
 // If positive, shift the value up.
-void	move_rb(t_stack **list_b, t_list *cheapest)
+void	move_rb(t_stack **list_b, int sort_b_count)
 {
-	while (cheapest->sort_b_count != 0)
+	while (sort_b_count != 0)
 	{
-		if (cheapest->sort_b_count < 0)
+		if (sort_b_count < 0)
 		{
-			cheapest->sort_b_count++;
+			sort_b_count++;
 			ft_rr(list_b);
 			write(1, "rrb\n", 4);
 		}
 		else
 		{
-			cheapest->sort_b_count--;
+			sort_b_count--;
 			ft_r(list_b);
 			write(1, "rb\n", 3);
 		}
@@ -137,7 +137,7 @@ void	move_num(t_stack **list_a, t_stack **list_b, t_list *cheapest)
 	}
 	else
 	{
-		move_ra(list_a, cheapest);
-		move_rb(list_b, cheapest);
+		move_ra(list_a, cheapest->sort_a_count);
+		move_rb(list_b, cheapest->sort_b_count);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: msawada <msawada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 20:05:42 by msawada           #+#    #+#             */
-/*   Updated: 2024/10/13 21:47:00 by msawada          ###   ########.fr       */
+/*   Updated: 2024/10/20 19:31:39 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	count_sort_b(t_stack *list_b, int num, int total)
 	int	insert_position;
 
 	insert_position = find_insert_position(list_b, num, total);
-	printf("insert_position = %d\n", insert_position);
 	if (insert_position <= total / 2)
 	{
 		return (insert_position);
@@ -71,4 +70,68 @@ int	count_sort_b(t_stack *list_b, int num, int total)
 	{
 		return (-(total - insert_position));
 	}
+}
+
+// Stores the value of the node passed as argument to
+// the structure and the number of moves required.
+// The exact total number of moves for A and B is returned as the return value.
+int	cost(t_stack *list_a, t_stack *list_b, t_stack *node, t_list *cheapest)
+{
+	cheapest->num = node->num;
+	cheapest->sort_a_count = count_sort_a(list_a, node->num, cheapest->a_total);
+	cheapest->sort_b_count = count_sort_b(list_b, node->num, cheapest->b_total);
+	if (cheapest->sort_a_count < 0 && cheapest->sort_b_count < 0)
+	{
+		if (cheapest->sort_a_count < cheapest->sort_b_count)
+			return (-(cheapest->sort_a_count));
+		else
+			return (-(cheapest->sort_b_count));
+	}
+	else if (cheapest->sort_a_count >= 0 && cheapest->sort_b_count >= 0)
+	{
+		if (cheapest->sort_a_count > cheapest->sort_b_count)
+			return (cheapest->sort_a_count);
+		else
+			return (cheapest->sort_b_count);
+	}
+	else
+	{
+		if (cheapest->sort_a_count < 0)
+			return (-(cheapest->sort_a_count) + cheapest->sort_b_count);
+		else
+			return (cheapest->sort_a_count + -(cheapest->sort_b_count));
+	}
+}
+
+// First, the first number of moves is set as minimum vlue,
+// and each time time a minimum value is reached,
+// the number of minimum moves is updated.
+// If the number of moves is the same,
+// the one with the smaller number is given priority.
+void	find_cheap_num(t_stack *list_a, t_stack *list_b, t_list *cheapest)
+{
+	int		cheap_count;
+	int		sum_count;
+	t_stack	*node;
+	t_list	stock_node;
+
+	cheap_count = INT_MAX;
+	node = list_a;
+	while (node != NULL)
+	{
+		stock_node = *cheapest;
+		sum_count = cost(list_a, list_b, node, &stock_node);
+		if (sum_count < cheap_count)
+		{
+			cheap_count = sum_count;
+			*cheapest = stock_node;
+		}
+		else if (cheap_count == sum_count && cheapest->num > node->num)
+		{
+			cheap_count = sum_count;
+			*cheapest = stock_node;
+		}
+		node = node->next;
+	}
+	return ;
 }

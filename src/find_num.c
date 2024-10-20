@@ -1,40 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   find_num.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msawada <msawada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/06 16:21:13 by msawada           #+#    #+#             */
-/*   Updated: 2024/10/13 19:51:12 by msawada          ###   ########.fr       */
+/*   Created: 2024/10/20 18:51:45 by msawada           #+#    #+#             */
+/*   Updated: 2024/10/20 19:32:41 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	print_list(t_stack *list_a, t_stack *list_b)
+int	find_big_num(t_stack *list)
 {
-	int	i;
+	int	biggest;
 
-	i = 0;
-	if (list_a == NULL && list_b == NULL)
+	biggest = INT_MIN;
+	while (list != NULL)
 	{
-		return ;
+		if (list->num > biggest)
+			biggest = list->num;
+		list = list->next;
 	}
-	while (list_a != NULL)
+	return (biggest);
+}
+
+int	find_small_num(t_stack *list)
+{
+	int	smallest;
+
+	smallest = INT_MAX;
+	while (list != NULL)
 	{
-		printf("index(%d) = ", i + 1);
-		printf("%d\n", list_a->num);
-		list_a = list_a->next;
-		i++;
+		if (list->num < smallest)
+			smallest = list->num;
+		list = list->next;
 	}
-	printf("\n");
-	while (list_b != NULL)
-	{
-		printf("index(%d) = ", i + 1);
-		printf("%d\n", list_b->num);
-		list_b = list_b->next;
-		i++;
-	}
-	printf("\n\n");
+	return (smallest);
 }
