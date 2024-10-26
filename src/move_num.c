@@ -6,7 +6,7 @@
 /*   By: msawada <msawada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 21:01:49 by msawada           #+#    #+#             */
-/*   Updated: 2024/10/19 22:48:33 by msawada          ###   ########.fr       */
+/*   Updated: 2024/10/26 06:47:50 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	move_rr(t_stack **list_a, t_stack **list_b, t_list *cheapest)
 		{
 			cheapest->sort_b_count--;
 			ft_r(list_b);
-			write(1, "rb\n", 4);
+			write(1, "rb\n", 3);
 		}
 	}
 }

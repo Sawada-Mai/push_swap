@@ -6,7 +6,7 @@
 /*   By: msawada <msawada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 20:05:42 by msawada           #+#    #+#             */
-/*   Updated: 2024/10/20 19:31:39 by msawada          ###   ########.fr       */
+/*   Updated: 2024/10/20 21:26:14 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 // Returuns where in list_b the number can be inserted
 int	find_insert_position(t_stack *list_b, int num, int total)
 {
-	int			position;
-	int			prev;
-	t_stack		*current;
+	int		position;
+	int		prev;
+	t_stack	*current;
 
 	if (list_b == NULL || total == 0)
 		return (0);
@@ -26,9 +26,8 @@ int	find_insert_position(t_stack *list_b, int num, int total)
 	current = list_b;
 	while (current != NULL && position < total)
 	{
-		if ((num > current->num && num < prev)
-			|| (num > current->num && prev < current->num)
-			|| (prev < current->num && num < prev))
+		if ((num > current->num && num < prev) || (num > current->num
+				&& prev < current->num) || (prev < current->num && num < prev))
 		{
 			return (position);
 		}
@@ -45,6 +44,8 @@ int	count_sort_a(t_stack *list, int num, int total)
 	int	insert_position;
 
 	insert_position = 0;
+	if (list == NULL)
+		return (0);
 	while (!(list->num == num))
 	{
 		insert_position++;

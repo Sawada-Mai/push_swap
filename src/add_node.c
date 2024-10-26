@@ -6,7 +6,7 @@
 /*   By: msawada <msawada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:22:10 by msawada           #+#    #+#             */
-/*   Updated: 2024/10/20 20:25:57 by msawada          ###   ########.fr       */
+/*   Updated: 2024/10/24 20:58:13 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,37 @@ t_stack	*search_end(t_stack *list)
 	return (list);
 }
 
+int	check_duplicates(t_stack *list, int num)
+{
+	int		flag;
+	t_stack	*current;
+
+	flag = 0;
+	current = list;
+	while (current != NULL)
+	{
+		if (current->num == num && flag == 0)
+		{
+			flag = 1;
+		}
+		else if (current->num == num)
+		{
+			write(1, "Error\n", 6);
+			free_node(&list);
+			exit(1);
+		}
+		current = current->next;
+	}
+	return (0);
+}
+
 // Find the last node and check for duplicates
-t_stack	*find_end_and_check_duplicates(t_stack	*list, int num)
+t_stack	*find_end(t_stack *list)
 {
 	if (list == NULL)
 		return (NULL);
 	while (list->next != NULL)
 	{
-		if (list->num == num)
-		{
-			write(1, "Error\n", 6);
-			return (NULL);
-		}
 		list = list->next;
 	}
 	return (list);
@@ -49,7 +68,6 @@ t_stack	*create_node(int num)
 	new_node = (t_stack *)malloc(sizeof(t_stack));
 	if (new_node == NULL)
 	{
-		write(1, "Error\n", 6);
 		return (NULL);
 	}
 	new_node->num = num;
@@ -75,12 +93,14 @@ void	add_node(t_stack **list, int num)
 		*list = new_node;
 		return ;
 	}
-	end = find_end_and_check_duplicates(*list, num);
+	end = find_end(*list);
 	if (end == NULL)
 	{
+		write(1, "Error\n", 6);
 		free_node(list);
 		exit(1);
 	}
 	end->next = new_node;
+	check_duplicates(*list, num);
 	return ;
 }

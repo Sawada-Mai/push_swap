@@ -6,7 +6,7 @@
 /*   By: msawada <msawada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 17:06:27 by msawada           #+#    #+#             */
-/*   Updated: 2024/10/20 18:52:13 by msawada          ###   ########.fr       */
+/*   Updated: 2024/10/24 21:35:17 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ int	list_sorted(t_stack *list)
 {
 	int	num;
 
+	if (list == NULL || list->next == NULL)
+		return (0);
 	num = list->num;
 	list = list->next;
 	while (list != NULL)
 	{
 		if (num > list->num)
+		{
 			return (0);
+		}
 		num = list->num;
 		list = list->next;
 	}
@@ -32,6 +36,8 @@ void	ascending_order(t_stack **list_a, int total_a)
 {
 	int	sort_count;
 
+	if (list_a == NULL)
+		return ;
 	sort_count = count_sort_a(*list_a, find_small_num(*list_a), total_a);
 	if (sort_count < 0)
 	{
@@ -53,6 +59,16 @@ void	ascending_order(t_stack **list_a, int total_a)
 	}
 }
 
+void	dubble_pp(t_stack **list_a, t_stack **list_b)
+{
+	if (list_a == NULL || list_b == NULL)
+		return ;
+	ft_p(list_a, list_b);
+	ft_p(list_a, list_b);
+	write(1, "pb\n", 3);
+	write(1, "pb\n", 3);
+}
+
 // Move the smallest number of ,
 // ovest to list_b until there are no more number on list_a.
 // After all the numbers are moved, return the numbers to list_a.
@@ -60,10 +76,9 @@ void	main_sort(t_stack **list_a, t_stack **list_b, int total)
 {
 	t_list	cheapest;
 
-	ft_p(list_a, list_b);
-	ft_p(list_a, list_b);
-	write(1, "pb\n", 3);
-	write(1, "pb\n", 3);
+	if (list_a == NULL || list_b == NULL)
+		return ;
+	dubble_pp(list_a, list_b);
 	cheapest.a_total = total - 2;
 	cheapest.b_total = 2;
 	while (cheapest.a_total > 0)
