@@ -1,6 +1,6 @@
 # コンパイラ設定
 NAME = push_swap
-CC = gcc
+CC = cc
 RM = rm -f
 FLAGS = -Wall -Wextra -Werror
 
